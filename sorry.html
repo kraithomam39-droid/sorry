@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I'm Sorry, My Love</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Lora:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:      #0d0a0e;
+      --paper:   #1a1118;
+      --border:  #7c3f5e;
+      --rose:    #e8637a;
+      --blush:   #f2a0b0;
+      --gold:    #d4a030;
+      --text:    #f0e6ee;
+      --muted:   #a08090;
+      --glow:    rgba(232,99,122,.18);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: 'Lora', serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5rem 1rem;
+      overflow-x: hidden;
+    }
+
+    /* Starfield */
+    .stars {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      border-radius: 50%;
+      background: white;
+      animation: twinkle ease-in-out infinite;
+    }
+    @keyframes twinkle {
+      0%,100% { opacity: .15; transform: scale(1);   }
+      50%      { opacity: .8;  transform: scale(1.4); }
+    }
+
+    /* Floating hearts */
+    .heart-float {
+      position: fixed;
+      font-size: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      animation: floatUp linear infinite;
+    }
+    @keyframes floatUp {
+      0%   { transform: translateY(0)     rotate(-10deg); opacity: .6; }
+      100% { transform: translateY(-100vh) rotate(10deg);  opacity: 0;  }
+    }
+
+    /* Envelope opening animation */
+    .scene {
+      animation: sceneIn .9s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes sceneIn {
+      from { opacity: 0; transform: translateY(40px) scale(.95); }
+      to   { opacity: 1; transform: translateY(0)    scale(1);   }
+    }
+
+    /* Letter card */
+    .letter {
+      position: relative;
+      max-width: 660px;
+      width: 100%;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 3.5rem 3rem;
+      box-shadow:
+        0 0 0 1px rgba(124,63,94,.15),
+        0 0 40px var(--glow),
+        0 0 100px rgba(232,99,122,.06),
+        0 30px 80px rgba(0,0,0,.5);
+    }
+
+    /* Top glow line */
+    .letter::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose), var(--blush), var(--rose), transparent);
+      box-shadow: 0 0 12px var(--rose);
+    }
+
+    /* Bottom glow line */
+    .letter::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 10%; right: 10%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--rose), var(--blush), var(--rose), transparent);
+      box-shadow: 0 0 12px var(--rose);
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .icon-ring {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px; height: 64px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      background: rgba(232,99,122,.07);
+      font-size: 1.8rem;
+      margin-bottom: 1.2rem;
+      box-shadow: 0 0 20px var(--glow);
+      animation: heartbeat 2.4s ease-in-out infinite;
+    }
+    @keyframes heartbeat {
+      0%,100% { transform: scale(1);    box-shadow: 0 0 20px var(--glow); }
+      14%      { transform: scale(1.15); box-shadow: 0 0 35px rgba(232,99,122,.35); }
+      28%      { transform: scale(1);    }
+      42%      { transform: scale(1.08); }
+    }
+
+    .title {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 2.1rem;
+      color: var(--rose);
+      line-height: 1.15;
+      text-shadow: 0 0 30px rgba(232,99,122,.3);
+    }
+
+    .subtitle {
+      font-family: 'Lora', serif;
+      font-size: .85rem;
+      color: var(--muted);
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      margin-top: .5rem;
+    }
+
+    /* Ornament */
+    .ornament {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.8rem 0;
+      color: var(--border);
+    }
+    .ornament::before,
+    .ornament::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border));
+    }
+    .ornament::after {
+      background: linear-gradient(90deg, var(--border), transparent);
+    }
+    .ornament-icon { font-size: 1rem; color: var(--rose); }
+
+    /* Body text */
+    .body-text {
+      font-family: 'Lora', serif;
+      font-size: 1.1rem;
+      line-height: 1.95;
+      color: var(--text);
+      opacity: .9;
+    }
+    .body-text p { margin-bottom: 1.2rem; }
+    .body-text p:last-child { margin-bottom: 0; }
+
+    em {
+      font-style: italic;
+      color: var(--blush);
+      font-size: 1.15rem;
+    }
+
+    strong {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    /* Signature */
+    .sig-wrap {
+      margin-top: 2.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: .3rem;
+    }
+    .sig-label {
+      font-size: .8rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .sig-name {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.9rem;
+      color: var(--rose);
+      text-shadow: 0 0 20px rgba(232,99,122,.2);
+    }
+
+    /* Promise seal */
+    .seal {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2.4rem;
+      gap: .5rem;
+    }
+    .seal-ring {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      color: var(--gold);
+      box-shadow: 0 0 16px rgba(212,160,48,.2);
+      animation: spinGlow 6s linear infinite;
+    }
+    @keyframes spinGlow {
+      0%,100% { box-shadow: 0 0 16px rgba(212,160,48,.2); }
+      50%      { box-shadow: 0 0 28px rgba(212,160,48,.45); }
+    }
+    .seal-text {
+      font-size: .72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      opacity: .65;
+    }
+
+    @media (max-width: 500px) {
+      .letter { padding: 2.5rem 1.6rem; }
+      .title { font-size: 1.7rem; }
+      .body-text { font-size: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Starfield -->
+  <div class="stars" id="stars"></div>
+
+  <div class="scene">
+    <div class="letter">
+
+      <!-- Header -->
+      <div class="header">
+        <div class="icon-ring">💌</div>
+        <div class="title">I'm Sorry, My Love</div>
+        <div class="subtitle">A letter from the heart</div>
+      </div>
+
+      <div class="ornament"><span class="ornament-icon">✦</span></div>
+
+      <!-- Body -->
+      <div class="body-text">
+        <p>
+          To the most beautiful girl in my world —
+        </p>
+        <p>
+          I won't try to make excuses, because you deserve more than that.
+          I messed up, I know it, and <em>I'm truly sorry.</em>
+        </p>
+        <p>
+          What I did was thoughtless, and seeing you hurt because of me is
+          something I can't stop thinking about. You mean everything to me —
+          <strong>your laugh, your warmth, the way you make every ordinary moment feel special.</strong>
+        </p>
+        <p>
+          I don't want to lose what we have. I don't want you to doubt,
+          even for a second, how deeply I care about you.
+          You are not just my girlfriend — <em>you are my favourite person.</em>
+        </p>
+        <p>
+          I promise to do better. To listen more, to think before I act,
+          and to be the partner you deserve every single day.
+        </p>
+        <p>
+          Please forgive me. My heart isn't the same without your smile in it. 🌹
+        </p>
+      </div>
+
+      <div class="ornament"><span class="ornament-icon">✦</span></div>
+
+      <!-- Signature -->
+      <div class="sig-wrap">
+        <div class="sig-label">Forever yours,</div>
+        <div class="sig-name">Your Man ❤️</div>
+      </div>
+
+      <!-- Seal -->
+      <div class="seal">
+        <div class="seal-ring">💍</div>
+        <div class="seal-text">A solemn promise</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Starfield
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 120; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      const size = Math.random() * 2.5 + .5;
+      s.style.cssText = `
+        width:${size}px; height:${size}px;
+        top:${Math.random()*100}%;
+        left:${Math.random()*100}%;
+        animation-duration:${2+Math.random()*4}s;
+        animation-delay:${Math.random()*5}s;
+      `;
+      starsEl.appendChild(s);
+    }
+
+    // Floating hearts
+    const emojis = ['❤️','💕','💖','🌹','💗'];
+    for (let i = 0; i < 12; i++) {
+      const h = document.createElement('div');
+      h.className = 'heart-float';
+      h.textContent = emojis[i % emojis.length];
+      h.style.cssText = `
+        left:${Math.random()*100}vw;
+        bottom:-2rem;
+        font-size:${.7+Math.random()*.9}rem;
+        animation-duration:${8+Math.random()*10}s;
+        animation-delay:${Math.random()*12}s;
+      `;
+      document.body.appendChild(h);
+    }
+  </script>
+</body>
+</html>
