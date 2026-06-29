@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pour Hafsa 💛</title>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background: #fff9f0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Confettis flottants */
+  .confetti {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .dot {
+    position: absolute;
+    border-radius: 50%;
+    animation: fall linear infinite;
+    opacity: 0.7;
+  }
+  @keyframes fall {
+    0%   { transform: translateY(-20px) rotate(0deg); opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Hero */
+  .hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 60px 20px 40px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: #FFE066;
+    color: #7a5c00;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 50px;
+    margin-bottom: 24px;
+  }
+  .hero h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(48px, 10vw, 96px);
+    background: linear-gradient(135deg, #FF6B6B, #FF9F43, #FFC312, #2ecc71, #48DBFB, #FF9FF3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    filter: drop-shadow(0 2px 8px rgba(255,107,107,0.2));
+  }
+  .hero-sub {
+    font-size: 18px;
+    color: #888;
+    font-weight: 600;
+    margin-bottom: 40px;
+  }
+
+  /* Carte principale */
+  .card-main {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 0 auto 48px;
+    background: #fff;
+    border-radius: 32px;
+    padding: 48px 40px;
+    box-shadow: 0 20px 60px rgba(255, 150, 80, 0.15), 0 4px 20px rgba(0,0,0,0.06);
+    border: 2px solid #FFE8CC;
+  }
+  .card-main .emoji-big {
+    font-size: 64px;
+    display: block;
+    text-align: center;
+    margin-bottom: 24px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-12px); }
+  }
+  .card-main p {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #555;
+    text-align: center;
+  }
+  .card-main strong {
+    color: #FF6B6B;
+    font-weight: 700;
+  }
+  .card-main .highlight {
+    display: inline-block;
+    background: #FFF3CD;
+    color: #7a5c00;
+    border-radius: 8px;
+    padding: 2px 8px;
+  }
+
+  /* Grille des qualités */
+  .qualities {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto 48px;
+    padding: 0 16px;
+  }
+  .qualities h2 {
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 28px;
+    color: #FF6B6B;
+    margin-bottom: 28px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+  .q-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: default;
+  }
+  .q-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+  }
+  .q-card .q-emoji { font-size: 36px; display: block; margin-bottom: 12px; }
+  .q-card .q-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 6px;
+  }
+  .q-card .q-desc {
+    font-size: 12px;
+    color: #999;
+    line-height: 1.5;
+  }
+  .q-card:nth-child(1) { border-top: 4px solid #FF6B6B; }
+  .q-card:nth-child(2) { border-top: 4px solid #FF9F43; }
+  .q-card:nth-child(3) { border-top: 4px solid #FFC312; }
+  .q-card:nth-child(4) { border-top: 4px solid #2ecc71; }
+  .q-card:nth-child(5) { border-top: 4px solid #48DBFB; }
+  .q-card:nth-child(6) { border-top: 4px solid #FF9FF3; }
+
+  /* Message final */
+  .final {
+    position: relative;
+    z-index: 1;
+    max-width: 560px;
+    margin: 0 auto 60px;
+    text-align: center;
+    padding: 0 20px;
+  }
+  .final-box {
+    background: linear-gradient(135deg, #FF6B6B, #FF9F43);
+    border-radius: 28px;
+    padding: 40px 32px;
+    color: #fff;
+  }
+  .final-box h3 {
+    font-family: 'Pacifico', cursive;
+    font-size: 26px;
+    margin-bottom: 16px;
+  }
+  .final-box p {
+    font-size: 16px;
+    line-height: 1.8;
+    opacity: 0.95;
+  }
+  .hearts {
+    font-size: 32px;
+    margin-top: 24px;
+    letter-spacing: 8px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.15); }
+  }
+
+  /* Footer */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 20px;
+    font-size: 13px;
+    color: #bbb;
+  }
+</style>
+</head>
+<body>
+
+<!-- Confettis -->
+<div class="confetti" id="confetti"></div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-badge">✨ Une page spéciale pour toi ✨</div>
+  <h1>Hafsa</h1>
+  <p class="hero-sub">La plus belle des amies 🌸</p>
+</section>
+
+<!-- Message principal -->
+<section>
+  <div class="card-main">
+    <span class="emoji-big">🌟</span>
+    <p>
+      Il y a des personnes qui entrent dans ta vie et qui la rendent <strong>infiniment plus belle</strong>.
+      Toi, Hafsa, tu es exactement cette personne.<br><br>
+      Ton sourire, ta bonne humeur, et ton énergie incroyable font de chaque moment passé avec toi
+      <span class="highlight">un souvenir précieux</span>.<br><br>
+      Cette page, c'est juste une petite façon de te dire à quel point tu comptes. 💛
+    </p>
+  </div>
+</section>
+
+<!-- Qualités -->
+<section class="qualities">
+  <h2>Ce qui te rend unique ✨</h2>
+  <div class="grid">
+    <div class="q-card">
+      <span class="q-emoji">😂</span>
+      <div class="q-label">Super drôle</div>
+      <div class="q-desc">Ton humour ensoleille n'importe quelle journée</div>
+    </div>
+    <div class="q-card">
+      <span class="q-emoji">💖</span>
+      <div class="q-label">Cœur en or</div>
+      <div class="q-desc">Toujours là quand on a besoin de toi</div>
+    </div>
+    <div class="q-card">
+      <span class="q-emoji">🌈</span>
+      <div class="q-label">Positive</div>
+      <div class="q-desc">Tu vois le bon côté de tout</div>
+    </div>
+    <div class="q-card">
+      <span class="q-emoji">🧠</span>
+      <div class="q-label">Intelligente</div>
+      <div class="q-desc">Une vraie force tranquille</div>
+    </div>
+    <div class="q-card">
+      <span class="q-emoji">🎯</span>
+      <div class="q-label">Déterminée</div>
+      <div class="q-desc">Quand tu veux quelque chose, tu l'obtiens</div>
+    </div>
+    <div class="q-card">
+      <span class="q-emoji">✨</span>
+      <div class="q-label">Unique</div>
+      <div class="q-desc">Il n'existe qu'une seule Hafsa dans ce monde</div>
+    </div>
+  </div>
+</section>
+
+<!-- Message final -->
+<section class="final">
+  <div class="final-box">
+    <h3>Pour toi, Hafsa 🌸</h3>
+    <p>
+      Merci d'être exactement qui tu es. Ne change rien,
+      garde ce sourire qui illumine tout autour de toi,
+      et sache que tu es chérie plus que tu ne le penses.
+    </p>
+    <div class="hearts">🧡 💛 💚 💙 💜</div>
+  </div>
+</section>
+
+<footer>Fait avec 💛 rien que pour toi</footer>
+
+<script>
+  const confetti = document.getElementById('confetti');
+  const colors = ['#FF6B6B','#FF9F43','#FFC312','#2ecc71','#48DBFB','#FF9FF3','#FFE066','#C56CF0'];
+  for (let i = 0; i < 60; i++) {
+    const dot = document.createElement('div');
+    dot.className = 'dot';
+    const size = Math.random() * 12 + 6;
+    dot.style.cssText = `
+      width: ${size}px;
+      height: ${size}px;
+      left: ${Math.random() * 100}%;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      animation-duration: ${Math.random() * 8 + 6}s;
+      animation-delay: ${Math.random() * 8}s;
+      top: ${Math.random() * -20}px;
+    `;
+    confetti.appendChild(dot);
+  }
+</script>
+</body>
+</html>
